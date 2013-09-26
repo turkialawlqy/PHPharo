@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * minify_output()
+ * Minify & Optimize The Output Buffer
+ * @return void
+ */
+function minify_output($type = 'html')
+{
+    /** Here i get the output buffer from phpharo globals manager */
+    $buffer = ob_get_clean();
+    /** Here i Load The Output Helper `it will be loaded only if didn`t loaded` */
+    PHPharo::LoadLibrary('Output');
+    /** Fix The Buffer */
+    $buffer = '<!-- Compressed, Minified, Optimized & Fixed -->' . $buffer;
+    $buffer = ob_tidy($buffer,$type,true);
+    if(isset($_SERVER['HTTP_ACCEPT_ENCODING']))
+        if(preg_match('|gzip|i', $_SERVER['HTTP_ACCEPT_ENCODING']))
+            echo ob_compress($buffer, 'gzip', 7);
+    else
+        echo $buffer;
+}
+
+(!isset(PHPharo::Globals()->output_doc_type))
+? PHPharo::Globals('output_doc_type', 'html') : PHPharo::Globals()->output_doc_type;
+
+MyHooks::register_action('phpharo.output', 'minify_output', array(PHPharo::Globals()->output_doc_type), 20);
