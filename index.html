@@ -3,31 +3,48 @@
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=640" />
 
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+    <link rel="stylesheet" href="stylesheets/core.css" media="screen"/>
+    <link rel="stylesheet" href="stylesheets/mobile.css" media="handheld, only screen and (max-device-width:640px)"/>
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css"/>
 
-    <title>PHPharo Non-MVC Framework</title>
-    <meta name='description' content='PHP Pharaoh Framework | PHPharo | is A Non-MVC Full Featsured Oop Framework ' />
+    <script type="text/javascript" src="javascripts/modernizr.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#main_content').headsmart()
+      })
+    </script>
+    <title>PHPharo by alash3al</title>
   </head>
 
   <body>
+    <a id="forkme_banner" href="https://github.com/alash3al/PHPharo">View on GitHub</a>
+    <div class="shell">
 
-    <header>
-      <div class="container">
-        <h1>PHPharo</h1>
-        <h2>PHPharo (PHP Pharaoh) is A Non-MVC Full Featured Framework That Makes You Create Any Type Of App(s)</h2>
+      <header>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <h1>PHPharo</h1>
+            <h2>PHPharo (PHP Pharaoh) is A Non-MVC Full Featured Framework That Makes You Create Any Type Of App(s) Even Sub-Apps</h2>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+      </header>
 
-        <section id="downloads">
-          <a href="https://github.com/alash3al/PHPharo/zipball/master" class="btn">Download as .zip</a>
-          <a href="https://github.com/alash3al/PHPharo/tarball/master" class="btn">Download as .tar.gz</a>
-          <a href="https://github.com/alash3al/PHPharo" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
-        </section>
-      </div>
-    </header>
+      <section id="downloads">
+        <span class="inner">
+          <a href="https://github.com/alash3al/PHPharo/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/alash3al/PHPharo/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+        </span>
+      </section>
 
-    <div class="container">
+
+      <span class="banner-fix"></span>
+
+
       <section id="main_content">
         <blockquote>
 <p>PHP Pharaoh is an oop modular non-mvc full featured framework that makes you create any app(s) with it</p>
@@ -41,11 +58,24 @@
 <li>Powerful Router full customizable </li>
 <li>Powerful Helpers (output, html (there is function to fix the buffer to html5 w3c)...)</li>
 <li>Advanced Output Management</li>
-<li>Built For Seo, Speed, ..... etc
-<img src="http://img19.imageshack.us/img19/9887/wd1t.png" alt="PHP Pharaoh Welcome Page"><img src="http://img268.imageshack.us/img268/3092/jwy8.png" alt="PHP Pharaoh Error Pages">
-</li>
+<li>Built For Seo, Speed,code re-use ..... etc</li>
+<li><a href="https://github.com/alash3al/PHPharo/wiki">See Wikis Here</a></li>
+<li><a href="https://github.com/alash3al/PHPharo/releases">See Releases Here</a></li>
 </ul>
       </section>
+
+      <footer>
+        <span class="ribbon-outer">
+          <span class="ribbon-inner">
+            <p>this project by <a href="https://github.com/alash3al">alash3al</a> can be found on <a href="https://github.com/alash3al/PHPharo">GitHub</a></p>
+          </span>
+          <span class="left-tail"></span>
+          <span class="right-tail"></span>
+        </span>
+        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <span class="octocat"></span>
+      </footer>
+
     </div>
 
               <script type="text/javascript">
