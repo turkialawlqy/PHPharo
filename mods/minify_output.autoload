@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * to set the doctype : 
+ *  PHPharo::Globals('output_doc_type', 'html'); or
+ *  PHPharo::Globals('output_doc_type', 'xml');
+ * 
+ * to stop remove whitespaces:
+ *  PHPharo::Globals('output_rm_whitespaces',  false);
+ *  false: no remove
+ *  true: yes, remove it
+ * 
+ */
+
+/**
+ * minify_output()
+ * Minify & Optimize The Output Buffer
+ * @return void
+ * @version 0.3
+ */
+function minify_output()
+{
+    /** Here i get the output buffer from phpharo globals manager */
+    $buffer = ob_get_clean();
+    /** Here i Load The Output Helper `it will be loaded only if didn`t loaded` */
+    PHPharo::LoadLibrary('Output');
+    /** Some Configs */
+    // doctype
+    $type = (!isset(PHPharo::Globals()->output_doc_type)) ? 'html' : PHPharo::
+        Globals()->output_doc_type;
+    // remove whitespaces
+    $rm_w = (!isset(PHPharo::Globals()->output_rm_whitespaces)) ? true : PHPharo::
+        Globals()->output_rm_whitespaces;
+
+    /** Fix The Buffer */
+    $buffer = '<!-- Compressed, Minified, Optimized & Fixed -->' . $buffer;
+    $buffer = ob_tidy($buffer, $type, $rm_w);
+    echo $buffer;
+}
+
+/** the hook action */
+MyHooks::register_action('phpharo.output', 'minify_output', array(), 20);

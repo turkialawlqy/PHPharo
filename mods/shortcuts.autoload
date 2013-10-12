@@ -1,0 +1,34 @@
+<?php
+
+/**
+ * eko()
+ * echo replacement
+ * @return string
+ */
+function eko()
+{
+    foreach (func_get_args() as $arg)
+        if(is_string($arg)) echo $arg;
+        else var_dump($arg);
+}
+
+
+/** Create Shorcuts */
+func_shorcut_creator(array(
+    'PHPharo::Globals' => '_G',
+    'PHPharo::Error' => '_E',
+    'PHPharo::Load' => '_L',
+    'PHPharo::LoadLibrary' => '_LB',
+    'PHPharo::With' => '_W',
+    'PHPharo::Env' => '_ENV',
+    'PHPharo::LoadMod' => '_LM',
+    'PHPharo::Render' => '_V',
+    'PHPharo::Assets' => '_A',
+    'MyRouter::addArray' => '_R',
+    'var_dump' => 'vd',
+    'print_r' => 'pr',
+    'set_time_limit' => 'stl', // :D
+    'func_shorcut_creator' => 'fsc'));
+    
+    
+    

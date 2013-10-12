@@ -1,0 +1,32 @@
+<?php
+
+
+class autoRoutes
+{
+    static function start()
+    {
+        
+        self::_load_portables();
+        self::_load_fulls();
+        
+    }
+    
+    protected static function _load_portables()
+    {
+        // portable apps
+        $p_apps = glob(WWW . '*.autoload_app.php');
+        PHPharo::Load($p_apps);
+    }
+    
+    protected static function _load_fulls()
+    {
+        // full apps
+        $f_apps = glob(WWW . '*.autoload_app');
+        foreach($f_apps as $app):
+            if(file_exists($app . '/routes.php'))
+                include_once $app . '/routes.php';
+        endforeach;
+    }
+}
+
+PHPharo::With(H)->register_action('phpharo.routes', 'autoRoutes::start');
