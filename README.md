@@ -1,3 +1,6 @@
+NOTE: I'm re-developing phpharo to be more better ... wait ;)
+===============================================================
+
 PHP Pharaoh 'PHPharo'
 =======================
 
