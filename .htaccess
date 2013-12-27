@@ -1,0 +1,11 @@
+ServerSignature Off
+
+### uncomment the next to enable mod_rewrite and remove index.php/ from uris ####
+
+#RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ index.php/$1 [L]
+#setEnv SERVER_URL_REWRITER_ON on 
+
+#################################
