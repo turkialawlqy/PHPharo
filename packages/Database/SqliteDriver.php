@@ -17,7 +17,7 @@
 /**
  * Pharo SqliteDriver Plugin For Database Package .
  *
- * Deal with mysql easily .
+ * Deal with sqlite easily .
  *
  * @package		Database
  * @author		Mohammed Alashaal
