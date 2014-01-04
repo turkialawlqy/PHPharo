@@ -98,7 +98,7 @@ class Database_SqliteDriver extends Database
         unset($data, $c, $v);
         $bound = array_merge($bound, (array)$binds);
         // run-it
-        return (bool)$this->query('UPDATE '.$table.' SET ' . implode(', ', $cols), $bound) . ' ' . $more_sql;
+        return (bool)$this->query('UPDATE '.$table.' SET ' . implode(', ', $cols) . ' ' . $more_sql, $bound);
     }
     
     /**
