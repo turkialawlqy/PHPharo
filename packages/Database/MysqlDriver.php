@@ -54,7 +54,7 @@ class Database_MysqlDriver extends Database
     {
         // just one insertion .
         // array( array(), array() ).
-        if(!is_array($data[0]) and !isset($data[1])):
+        if(!is_array($data[0])):
             // for prepared statement
             $values = implode(', ', array_fill(1, count($data), '?'));
             // run it .
@@ -62,7 +62,7 @@ class Database_MysqlDriver extends Database
         endif;
         
         // for multi-insertion .
-        if(is_array($data[0]) and isset($data[1]) and is_array($data[1])):
+        if(is_array($data[0])):
             $bound = array();
             // values for ?
             $values = implode(', ', array_fill(1, count($data), '('.implode(', ', array_fill(1, count($data[1]), '?')).')'));
