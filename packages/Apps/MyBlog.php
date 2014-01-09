@@ -50,7 +50,7 @@ class Apps_MyBlog extends Database_MysqlDriver
      */
     function deletePost($post_id)
     {
-        return (bool)$this->delete('blog_posts', 'where post_id in ('.implode(', ', array_fill(1, count((array)$id), '?')).')', (array)$id);
+        return (bool)$this->delete('blog_posts', 'where post_id in ('.implode(', ', array_fill(1, count((array)$post_id), '?')).')', (array)$post_id);
     }
     
     /**
