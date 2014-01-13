@@ -50,30 +50,14 @@ class Database_MysqlDriver extends Database
      * @param array $data
      * @return bool
      */
-    function insert($table, $columns, array $data)
+    function insert($table, $data)
     {
-        // just one insertion .
-        // array( array(), array() ).
-        if(!is_array($data[0])):
-            // for prepared statement
-            $values = implode(', ', array_fill(1, count($data), '?'));
-            // run it .
-            return (bool)$this->query('INSERT INTO ' . $table . '('.$columns.') VALUES('.$values.')', $data);
+        if(is_array($data)):
+        $columns = implode(', ' , array_keys($data));
+        $values = implode("\', \'" , $data);
+            return (bool)$this->query('INSERT INTO '.$table.'('.$columns.') VALUES ('.$values.')');
         endif;
-        
-        // for multi-insertion .
-        if(is_array($data[0])):
-            $bound = array();
-            // values for ?
-            $values = implode(', ', array_fill(1, count($data), '('.implode(', ', array_fill(1, count($data[1]), '?')).')'));
-            // convert multiDArray to flat-array
-            foreach($data as &$a) $bound = array_merge($bound, $a);
-            // free some memory
-            unset($data, $a);
-            // run-it .
-            return (bool)$this->query('INSERT INTO '.$table.'('.$columns.') VALUES'.$values.'', $bound);
-        endif;
-        
+
         // un-known
         return false;
     }
@@ -131,9 +115,40 @@ class Database_MysqlDriver extends Database
      * @param mixed $binds
      * @return bool
      */
-    function select($table, $columns = '*', $more_sql = null, $binds = null)
+    function select($option)
     {
-        return (bool)$this->query('SELECT '. $columns .' FROM ' . $table . ' ' . $more_sql, $binds);
+        $defualt = array(
+            'table' => '',
+            'filed' => '*',
+            'condition' => '1',
+            'order' => '1',
+            'limit' => '50',
+            'while' => 0,
+            'return' => 'fetch_assoc');
+        $option = array_merge($defualt, $option);
+        $query = "SELECT {$option['filed']} FROM {$option['table']} WHERE {$option['condition']} ORDER BY {$option['order']} LIMIT {$option['limit']}";
+        $query_run = $this->DB->query($query);
+        if (@$query_run->num_rows > 0) {
+            if ($option['while'] == 1) {
+                while ($fetch_a = $query_run->fetch_assoc()) {
+                    $fetch[] = $fetch_a;
+                }
+            } else {
+                switch ($option['return']) {
+                    case "fetch_assoc":
+                        $fetch = $query_run->fetch_assoc();
+                        break;
+                    case "num_rows":
+                        $fetch = $query_run->num_rows;
+                        break;
+                    default:
+                        $fetch = $query_run->fetch_assoc();
+                        break;
+                }
+            }
+            return $fetch;
+        }
+         return false;
     }
     
     /**
@@ -145,6 +160,12 @@ class Database_MysqlDriver extends Database
      * @param string $more_sql
      * @return int
      */
+    /*
+    $select = array('table' => 'name_table', 'return' => 'num_rows');
+    $this->select($select); 
+    
+    OR $this->count('name_table', 'more_sql');
+    */
     function count($table, $more_sql = null)
     {
         $this->query('SELECT COUNT(*) FROM '.$table.' AS num_rows ' . $more_sql);
